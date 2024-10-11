@@ -11,6 +11,8 @@ public class TestDao {
     public List<String> testConnection() throws SQLException {
         List<String> databases = new ArrayList<>();
 
+        long start = System.currentTimeMillis();
+
         try (Connection connection = DatabaseConnector.getConnection()) {
             Statement statement = connection.createStatement();
 
@@ -21,6 +23,9 @@ public class TestDao {
                 databases.add(resultSet.getString("Database"));
             }
         }
+
+        long end = System.currentTimeMillis();
+        System.out.println("Total time to execute query: " + (end - start));
 
         return databases;
     }
